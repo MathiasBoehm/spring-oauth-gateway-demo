@@ -1,0 +1,4 @@
+server:
+  port: 9080
+
+# security.oauth2.authorizationserver.jwt.enabled: false
