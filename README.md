@@ -84,8 +84,19 @@ Result:
 ```
 
 
-# Extract Token and call the gateway
+## Extract Token and call the gateway
 ```bash
 $ TOKEN=$(curl gateway:password@localhost:9080/oauth/token -d "grant_type=password&username=user1&password=password" | jq '.access_token' | sed 's/"//g') 
 $ curl -H "Authorization: Bearer $TOKEN" localhost:9090/service1/persons/1
 ```
+
+# Other Calls
+```bash
+$ TOKEN_USER1=$(curl gateway:password@localhost:9080/oauth/token -d "grant_type=password&username=user1&password=password" | jq '.access_token' | sed 's/"//g')
+$ TOKEN_USER2=$(curl gateway:password@localhost:9080/oauth/token -d "grant_type=password&username=user2&password=password" | jq '.access_token' | sed 's/"//g')
+$ TOKEN_ADMIN=$(curl gateway:password@localhost:9080/oauth/token -d "grant_type=password&username=admin&password=password" | jq '.access_token' | sed 's/"//g')
+
+$ curl -H "Authorization: Bearer $TOKEN_USER1" localhost:9090/orderservice/orders/1 | jq . 
+```
+
+
