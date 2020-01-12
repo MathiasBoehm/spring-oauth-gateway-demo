@@ -1,0 +1,43 @@
+###
+# Direct Get
+GET http://localhost:9091/persons/1
+
+###
+# Direct Update
+PUT http://localhost:9091/persons/1
+Content-Type: application/json
+
+{
+  "firstname": "John",
+  "lastname": "Doe",
+  "birthday": "1967-04-05"
+}
+
+
+
+###
+# @name Login
+POST http://gateway:password@localhost:9080/oauth/token 
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username=user1
+&password=password
+
+###
+# Get Via Coded Gateway
+GET http://localhost:9090/service1/persons/1
+Authorization: Bearer {{Login.response.body.access_token}}
+
+###
+# Update Via Coded Gateway
+PUT http://localhost:9090/service1/persons/1
+Content-Type: application/json
+Authorization: Bearer {{Login.response.body.access_token}}
+
+{
+  "firstname": "John",
+  "lastname": "Jacobsen",
+  "birthday": "1967-04-01"
+}
+

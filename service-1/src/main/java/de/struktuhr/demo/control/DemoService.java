@@ -19,6 +19,18 @@ public class DemoService {
     }
 
     public Person getPerson(Long id) {
+        return internalGetPerson(id);
+    }
+
+    public Person updatePerson(Long id, Person person) {
+        Person p = internalGetPerson(id);
+        p.setBirthday(person.getBirthday());
+        p.setFirstname(person.getFirstname());
+        p.setLastname(person.getLastname());
+        return p;
+    }
+
+    private Person internalGetPerson(Long id) {
         Person person = persons.get(id);
         if (person == null) {
             throw new NotFoundException("Cannot find a person with id " + id);

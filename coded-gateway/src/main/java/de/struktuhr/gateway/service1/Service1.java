@@ -3,6 +3,7 @@ package de.struktuhr.gateway.service1;
 import de.struktuhr.gateway.common.CustomErrorDecoder;
 import de.struktuhr.gateway.service1.entity.Person;
 import feign.Feign;
+import feign.Headers;
 import feign.Param;
 import feign.RequestLine;
 import feign.jackson.JacksonDecoder;
@@ -17,6 +18,10 @@ public class Service1 {
         return service1Client().getPerson(id);
     }
 
+    public Person updatePerson(Long id, Person person) {
+        return service1Client().updatePerson(person, id);
+    }
+
     private Service1Client service1Client() {
         return Feign.builder()
                 .decoder(new JacksonDecoder())
@@ -29,5 +34,9 @@ public class Service1 {
     interface Service1Client {
         @RequestLine("GET /persons/{id}")
         Person getPerson(@Param("id") Long id);
+
+        @RequestLine("PUT /persons/{id}")
+        @Headers("Content-Type: application/json")
+        Person updatePerson(Person person, @Param("id") Long id);
     }
 }
