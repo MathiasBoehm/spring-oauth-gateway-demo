@@ -14,12 +14,22 @@ public class SpringGatewayDemoApplication {
 	}
 
 	@Bean
-	public RouteLocator routes(RouteLocatorBuilder builder) {
+	public RouteLocator routes(RouteLocatorBuilder builder, ApiKeyGatewayFilterFactory apiKeyGatewayFilterFactory) {
 		return builder.routes()
 			.route(r-> r
-				.path("/service1/**")
-				.filters(f -> f.rewritePath("/service1(?<segment>/?.*)", "$\\{segment}"))
+				.path("/personservice/**")
+				.filters(f -> f.rewritePath("/personservice(?<segment>/?.*)", "$\\{segment}"))
 				.uri("http://localhost:9091"))
-				.build();
+			.route(r-> r
+					.path("/orderservice/**")
+					.filters(f -> f
+							.filter(apiKeyGatewayFilterFactory.apply(new ApiKeyGatewayFilterFactory.Config("123~456")))
+							.rewritePath("/orderservice(?<segment>/?.*)", "$\\{segment}"))
+					.uri("http://localhost:9092"))
+			.build();
 	}
+
+
+
+
 }
