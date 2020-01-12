@@ -14,9 +14,8 @@ Content-Type: application/json
 }
 
 
-
 ###
-# @name Login
+# @name LoginUser1
 POST http://gateway:password@localhost:9080/oauth/token 
 Content-Type: application/x-www-form-urlencoded
 
@@ -25,15 +24,33 @@ grant_type=password
 &password=password
 
 ###
+# @name LoginUser2
+POST http://gateway:password@localhost:9080/oauth/token 
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username=user2
+&password=password
+
+###
+# @name LoginAdmin
+POST http://gateway:password@localhost:9080/oauth/token 
+Content-Type: application/x-www-form-urlencoded
+
+grant_type=password
+&username=admin
+&password=password
+
+###
 # Get Via Coded Gateway
-GET http://localhost:9090/service1/persons/1
-Authorization: Bearer {{Login.response.body.access_token}}
+GET http://localhost:9090/personservice/persons/1
+Authorization: Bearer {{LoginUser1.response.body.access_token}}
 
 ###
 # Update Via Coded Gateway
-PUT http://localhost:9090/service1/persons/1
+PUT http://localhost:9090/personservice/persons/1
 Content-Type: application/json
-Authorization: Bearer {{Login.response.body.access_token}}
+Authorization: Bearer {{LoginUser1.response.body.access_token}}
 
 {
   "firstname": "John",
@@ -41,3 +58,12 @@ Authorization: Bearer {{Login.response.body.access_token}}
   "birthday": "1967-04-01"
 }
 
+###
+# Get Order Via Coded Gateway
+GET http://localhost:9090/orderservice/orders/1
+Authorization: Bearer {{LoginUser1.response.body.access_token}}
+
+###
+# Get Order Via Coded Gateway
+GET http://localhost:9090/orderservice/orders/1
+Authorization: Bearer {{LoginUser2.response.body.access_token}}

@@ -19,7 +19,7 @@ public class CustomErrorDecoder implements ErrorDecoder {
             String message = map.get("message");
             return new ResponseStatusException(HttpStatus.resolve(response.status()), message);
         } catch (Exception e) {
-            return new RuntimeException(e.getMessage());
+            return new RuntimeException(e);
         }
     }
 

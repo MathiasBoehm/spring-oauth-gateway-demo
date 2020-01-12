@@ -7,15 +7,21 @@ Simple demo showing, how to secure a microservice behind a custom gateway applic
 Spring based OAuth Server
 Port 9080
 
-
-## 2 gateway
+## 2a custom coded gateway
 Gateway
 Port 9090
 
-## 3 service_1
+## 2b spring cloud gateway
+Gateway
+Port 9081
+
+## 3 person-service
 Simple Person Service
 Port: 9091
 
+## 4 order-service
+Simple Order Service
+Port: 9092
 
 # Flow
 
@@ -27,22 +33,27 @@ $ cd oauthserver
 $ mvn clean package spring-boot:run
 ```
 
-### Start Gateway
+### Start Custom Gateway or Spring Cloud Gateway
 ```shell
-$ cd gateway
+$ cd coded-gateway
 $ mvn clean package spring-boot:run
 ```
 
-### Start Service 1
+### Start Person Service
 ```shell
-$ cd service-1
+$ cd person-service
+$ mvn clean package spring-boot:run
+```
+### Start Order Service
+```shell
+$ cd order-service
 $ mvn clean package spring-boot:run
 ```
 
 
 ## Call Gateway with missing Authorization Token
 ```bash
-$ curl -v http://localhost:9090/service1/persons/1
+$ curl -v http://localhost:9090/personservice/persons/1
 ```
 
 Result:
@@ -87,7 +98,7 @@ Result:
 ## Extract Token and call the gateway
 ```bash
 $ TOKEN=$(curl gateway:password@localhost:9080/oauth/token -d "grant_type=password&username=user1&password=password" | jq '.access_token' | sed 's/"//g') 
-$ curl -H "Authorization: Bearer $TOKEN" localhost:9090/service1/persons/1
+$ curl -H "Authorization: Bearer $TOKEN" localhost:9090/personservice/persons/1
 ```
 
 # Other Calls
