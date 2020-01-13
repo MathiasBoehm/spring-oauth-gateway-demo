@@ -4,15 +4,16 @@
 	<modelVersion>4.0.0</modelVersion>
 
     <groupId>de.struktuhr</groupId>
-    <artifactId>oauth-gateway-demo</artifactId>
+    <artifactId>spring-oauth-gateway-demo</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0</version>
     <modules>
         <module>oauth-server</module>
         <module>coded-gateway</module>
 		<module>spring-gateway-custom-security</module>
 		<module>order-service</module>
 		<module>person-service</module>
+        <module>spring-gateway-spring-security</module>
     </modules>
 
 	

@@ -5,6 +5,7 @@ A simple demo project which demonstrates, how to secure multiple microservices b
 - oauth-server (9080)
 - coded-gateway (9081)
 - spring-gateway-custom-security (9082)
+- spring-gateway-spring-security (9083)
 - person-service (9091)
 - order-service (9092)
 
@@ -80,7 +81,23 @@ Payload:
 
 
 # 4 Spring Cloud Gateway using Spring Security
-
+## 4.1 - Start Services (person-service, order-service, oauth-server, spring-gateway-spring-security)
+```batch
+$ scripts\start-spring-security-demo.bat
+```
+## 4.2 - Call Gateway with missing Authorization Token
+```bash
+$ curl -v http://localhost:9083/orderservice/orders/1
+```
+Result:
+```bash
+...HTTP/1.1 401 Unauthorized
+```
+## 5.3 - Extract Token and call the gateway
+```bash
+$ TOKEN=$(curl gateway:password@localhost:9080/oauth/token -d "grant_type=password&username=user1&password=password" | jq '.access_token' | sed 's/"//g') 
+$ curl -H "Authorization: Bearer $TOKEN" localhost:9083/orderservice/orders/1 | jq .
+```
 
 # 5 Custom Coded Gateway
 ## 5.1 - Start Services (person-service, order-service, oauth-server, coded-gateway)
