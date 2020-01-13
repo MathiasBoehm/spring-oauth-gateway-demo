@@ -2,11 +2,15 @@ server:
   port: 9082
   error:
     include-exception: false
+    includeStacktrace: NEVER
 
 logging:
   level:
     org.springframework.cloud.gateway: INFO
     reactor.netty.http.client: INFO
+
+app:
+  publickey: MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAvIhhcanerl+Dj1rmh1scOy+14tcRvwWF1el3ZZUNgkILu3vH1tIya+UkFbN9Z9IdcejHghOO+quV9yjgrMwY7tFZW95es6dslPuVrgofIlK0BGTD3Px+F/OWeKOvyBD6qEcTuRev8rWCU5o/IJKl4H8mM1nas5+swqo3qYwo44SoBN8A/9IG5bwuxb9g/TeKEuNWmspj9vUZqh1IMFHeI5dYvdxIT8h+IxLAdQxgH5+XqhqzCh1z1Qnecuqh2unOILv2pbscDo27CbA8+7HuD676fw+whR6ERRIsKGEr6zN2BKKOKJoPzZbde3y1CRQ1QlS12i1HZR2Gjv95oAybtwIDAQAB
 
 spring:
   cloud:
@@ -23,5 +27,5 @@ spring:
           predicates:
             - Path=/orderservice/**
           filters:
-            - ApiKey=123~456
+            - CustomToken
             - RewritePath=/orderservice(?<segment>/?.*), $\{segment}
