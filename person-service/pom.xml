@@ -10,9 +10,9 @@
 	</parent>
 	<groupId>de.struktuhr</groupId>
 	<artifactId>person-service</artifactId>
-	<version>1.0.-SNAPSHOT</version>
+	<version>1.0</version>
 	<name>person-service</name>
-	<description>Demo Service Project with Spring Boot</description>
+	<description>Demo Person Service</description>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

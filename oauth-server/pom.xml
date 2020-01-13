@@ -4,12 +4,12 @@
 	<modelVersion>4.0.0</modelVersion>
 
 	<groupId>de.struktuhr</groupId>
-	<artifactId>oauth-auth-server</artifactId>
-	<version>1.0.0-SNAPSHOT</version>
+	<artifactId>oauth-server</artifactId>
+	<version>1.0</version>
 	<packaging>jar</packaging>
 
-	<name>oauth-auth-server</name>
-	<description>Demo project for Spring Boot</description>
+	<name>oauth-server</name>
+	<description>Demo OAuth Server</description>
 
 	<parent>
 		<groupId>org.springframework.boot</groupId>

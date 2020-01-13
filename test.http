@@ -13,44 +13,43 @@ Content-Type: application/json
   "birthday": "1967-04-05"
 }
 
-
 ###
-# @name LoginUser1
+# LoginUser1
 POST http://gateway:password@localhost:9080/oauth/token 
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=password
-&username=user1
-&password=password
+grant_type=password&username=user1&password=password
+
+> {% client.global.set("access_token_user1", response.body.access_token); %}
 
 ###
-# @name LoginUser2
+# LoginUser2
 POST http://gateway:password@localhost:9080/oauth/token 
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=password
-&username=user2
-&password=password
+grant_type=password&username=user2&password=password
+
+> {% client.global.set("access_token_user2", response.body.access_token); %}
 
 ###
-# @name LoginAdmin
+# LoginAdmin
 POST http://gateway:password@localhost:9080/oauth/token 
 Content-Type: application/x-www-form-urlencoded
 
-grant_type=password
-&username=admin
-&password=password
+grant_type=password&username=admin&password=password
+
+> {% client.global.set("access_token_admin", response.body.access_token); %}
 
 ###
 # Get Via Coded Gateway
-GET http://localhost:9090/personservice/persons/1
-Authorization: Bearer {{LoginUser1.response.body.access_token}}
+GET http://localhost:9081/personservice/persons/1
+Authorization: Bearer {{access_token_user1}}
 
 ###
 # Update Via Coded Gateway
-PUT http://localhost:9090/personservice/persons/1
+PUT http://localhost:9081/personservice/persons/1
 Content-Type: application/json
-Authorization: Bearer {{LoginUser1.response.body.access_token}}
+Authorization: Bearer {{access_token_user1}}
 
 {
   "firstname": "John",
@@ -60,13 +59,13 @@ Authorization: Bearer {{LoginUser1.response.body.access_token}}
 
 ###
 # Get Order Via Coded Gateway
-GET http://localhost:9090/orderservice/orders/1
-Authorization: Bearer {{LoginUser1.response.body.access_token}}
+GET http://localhost:9081/orderservice/orders/1
+Authorization: Bearer {{access_token_user1}}
 
 ###
 # Get Order Via Coded Gateway
-GET http://localhost:9090/orderservice/orders/1
-Authorization: Bearer {{LoginUser2.response.body.access_token}}
+GET http://localhost:9081/orderservice/orders/1
+Authorization: Bearer {{access_token_user2}}
 
 
 ###
@@ -88,3 +87,5 @@ Content-Type: application/json
 # Get Order Via Spring Cloud Gateway
 GET http://localhost:9081/orderservice/orders/1
 X-API-KEY: 123
+
+###

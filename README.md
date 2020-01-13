@@ -1,27 +1,13 @@
 # Description
-Simple demo showing, how to secure a microservice behind a custom gateway application
+A simple demo project which demonstrates, how to secure multiple microservices behind a custom gateway application
 
 # Demo Parts
+- oauth-server (9080)
+- coded-gateway (9081)
+- spring-gateway-custom-security (9082)
+- person-service (9091)
+- order-service (9092)
 
-## 1 oauthserver
-Spring based OAuth Server
-Port 9080
-
-## 2a custom coded gateway
-Gateway
-Port 9090
-
-## 2b spring cloud gateway
-Gateway
-Port 9081
-
-## 3 person-service
-Simple Person Service
-Port: 9091
-
-## 4 order-service
-Simple Order Service
-Port: 9092
 
 # Flow
 
