@@ -1,2 +1,27 @@
 server:
-    port: 9082
+  port: 9082
+  error:
+    include-exception: false
+
+logging:
+  level:
+    org.springframework.cloud.gateway: INFO
+    reactor.netty.http.client: INFO
+
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: person_service_route
+          uri: http://localhost:9091
+          predicates:
+            - Path=/personservice/**
+          filters:
+            - RewritePath=/personservice(?<segment>/?.*), $\{segment}
+        - id: order_service_route
+          uri: http://localhost:9092
+          predicates:
+            - Path=/orderservice/**
+          filters:
+            - ApiKey=123~456
+            - RewritePath=/orderservice(?<segment>/?.*), $\{segment}

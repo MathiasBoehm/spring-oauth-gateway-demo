@@ -19,6 +19,10 @@ public class ApiKeyGatewayFilterFactory extends AbstractGatewayFilterFactory<Api
 
     private final Logger logger = LoggerFactory.getLogger(ApiKeyGatewayFilterFactory.class);
 
+    public ApiKeyGatewayFilterFactory() {
+        super(Config.class);
+    }
+
     @Override
     public GatewayFilter apply(Config config) {
         return (exchange, chain) -> {
@@ -41,6 +45,11 @@ public class ApiKeyGatewayFilterFactory extends AbstractGatewayFilterFactory<Api
                 }
             }
         };
+    }
+
+    @Override
+    public List<String> shortcutFieldOrder() {
+        return Arrays.asList("apiKeys");
     }
 
     private String findApiKey(ServerWebExchange exchange) {

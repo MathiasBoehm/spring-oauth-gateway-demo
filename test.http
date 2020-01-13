@@ -70,11 +70,11 @@ Authorization: Bearer {{access_token_user2}}
 
 ###
 # Get Person Via Spring Cloud Gateway
-GET http://localhost:9081/personservice/persons/1
+GET http://localhost:9082/personservice/persons/1
 
 ###
 # Update Via Spring Cloud Gateway
-PUT http://localhost:9081/personservice/persons/1
+PUT http://localhost:9082/personservice/persons/1
 Content-Type: application/json
 
 {
@@ -85,7 +85,8 @@ Content-Type: application/json
 
 ###
 # Get Order Via Spring Cloud Gateway
-GET http://localhost:9081/orderservice/orders/1
+GET http://localhost:9082/orderservice/orders/1
 X-API-KEY: 123
 
 ###
+

@@ -13,6 +13,7 @@ public class SpringGatewayDemoApplication {
 		SpringApplication.run(SpringGatewayDemoApplication.class, args);
 	}
 
+	/*
 	@Bean
 	public RouteLocator routes(RouteLocatorBuilder builder, ApiKeyGatewayFilterFactory apiKeyGatewayFilterFactory) {
 		return builder.routes()
@@ -29,7 +30,5 @@ public class SpringGatewayDemoApplication {
 			.build();
 	}
 
-
-
-
+	 */
 }

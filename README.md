@@ -12,28 +12,8 @@ A simple demo project which demonstrates, how to secure multiple microservices b
 # Flow
 
 ## Start Services
-
-### Start OAuth Server
-```shell
-$ cd oauthserver
-$ mvn clean package spring-boot:run
-```
-
-### Start Custom Gateway or Spring Cloud Gateway
-```shell
-$ cd coded-gateway
-$ mvn clean package spring-boot:run
-```
-
-### Start Person Service
-```shell
-$ cd person-service
-$ mvn clean package spring-boot:run
-```
-### Start Order Service
-```shell
-$ cd order-service
-$ mvn clean package spring-boot:run
+```batch
+$ startDemo.bat
 ```
 
 
